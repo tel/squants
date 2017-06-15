@@ -1,4 +1,5 @@
 import squants.time.Frequency
+import scala.language.implicitConversions
 
 /*                                                                      *\
 ** Squants                                                              **
@@ -118,4 +119,13 @@ package object squants {
     def /(that: Time) = Each(bd) / that
     def per(that: Time): Frequency = /(that)
   }
+
+  /**
+    * Provides an implicit conversion from Dimensionless to Double, allowing a Dimensionless value
+    * to be used anywhere a Double (or similar primitive) is required
+    *
+    * @param d Dimensionless
+    * @return
+    */
+  implicit def DimensionlessToDouble(d: Dimensionless): Double = d.toEach
 }
